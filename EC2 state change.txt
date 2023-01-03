@@ -1,0 +1,13 @@
+import json
+import boto3
+
+def lambda_handler(event,context):
+    subject="Attention Please"
+    client=boto3.client("ses")
+    body="""
+         <br>Production Server is Down"
+         """
+    message={"Subject":{"Data":subject},"Body":{"Html":{"Data":body}}}
+    response=client.send_email(Source="nilotpal.bhuniya@gmail.com",Destination={"ToAddresses":["nilotpal.bhuniya@gmail.com"]},Message=message)
+    print("This mail is sent successfully")
+
